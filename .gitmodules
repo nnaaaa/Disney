@@ -1,0 +1,18 @@
+[submodule "DisneyServer"]
+	path = DisneyServer
+	url = https://github.com/nnaaaa/DisneyServer.git
+[submodule "BotManager"]
+	path = BotManager
+	url = https://github.com/nnaaaa/BotManager.git
+[submodule "DisneyChatApp"]
+	path = DisneyChatApp
+	url = https://github.com/nnaaaa/DisneyChatApp.git
+[submodule "Disneyjs"]
+	path = Disneyjs
+	url = https://github.com/nnaaaa/Disneyjs.git
+[submodule "WeatherBot"]
+	path = WeatherBot
+	url = https://github.com/nnaaaa/WeatherBot.git
+[submodule "BlackjackBot"]
+	path = BlackjackBot
+	url = https://github.com/nnaaaa/BlackjackBot.git
