@@ -11,16 +11,21 @@ services:
     ports:
       - ${GATEWAY_PORT}:${GATEWAY_PORT}
     environment:
-      DB_HOST: gateway-database
-      DB_PORT: ${GATEWAY_DB_PORT}
-      DB_USER: root
-      DB_PASSWORD: dummyguys
-      DB_DB: disney
+      # DB_HOST: gateway-database
+      # DB_PORT: ${GATEWAY_DB_PORT}
+      # DB_USER: root
+      # DB_PASSWORD: dummyguys
+      # DB_DB: disney
+      DB_HOST: cnpm-db.mysql.database.azure.com
+      DB_PORT: 3306
+      DB_DB: CNPM
+      DB_USER: cnpm0905
+      DB_PASSWORD: Database0905
       MESSAGE_BROKER_PORT: ${KAFKA_DOCKER_PORT}
       MESSAGE_BROKER_HOST: message-broker
-    depends_on:
+    # depends_on:
       # - message-broker
-      - gateway-database
+      # - gateway-database
       # - message-server
 
   # gateway-database:
@@ -32,16 +37,16 @@ services:
   #     MYSQL_ROOT_PASSWORD: dummyguys
   #     MYSQL_DATABASE: disney
 
-  # gateway-database-manager:
-  #   image: phpmyadmin/phpmyadmin:4.7
-  #   ports:
-  #     - ${GATEWAY_DB_MANAGER_PORT}:80
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: dummyguys
-  #     PMA_HOST: gateway-database
-  #     PMA_PORT: ${GATEWAY_DB_PORT}
-  #     PMA_USER: root
-  #     PMA_PASSWORD: dummyguys
+  gateway-database-manager:
+    image: phpmyadmin/phpmyadmin:4.7
+    ports:
+      - ${GATEWAY_DB_MANAGER_PORT}:80
+    environment:
+      MYSQL_ROOT_PASSWORD: Database0905
+      PMA_HOST: cnpm-db.mysql.database.azure.com
+      PMA_PORT: 3306
+      PMA_USER: cnpm0905
+      PMA_PASSWORD: Database0905
   #   depends_on:
   #     - gateway-database
 
@@ -58,19 +63,19 @@ services:
   #     PG_TRUST_LOCALNET: true
 
   # gateway-database-manager:
-  #   container_name: nngguyenanh/gateway-database-manager
+  #   # container_name: nngguyenanh/gateway-database-manager
   #   image: michalhosna/adminer:4.7.7-en_v1
   #   ports:
   #     - 8080:8080
   #   depends_on:
   #     - gateway-database
   #   environment:
-  #     ADMINER_PASSWORD: dummyguys
-  #     ADMINER_USERNAME: root
-  #     ADMINER_DB: disney
-  #     ADMINER_DRIVER: pgsql
-  #     ADMINER_SERVER: gateway-database
-  #     ADMINER_AUTOLOGIN: 1
+  #     ADMINER_PASSWORD: Database0905
+  #     ADMINER_USERNAME: cnpm0905
+  #     ADMINER_DB: CNPM
+  #     ADMINER_DRIVER: mysql
+  #     ADMINER_SERVER: cnpm-db.mysql.database.azure.com
+  #     # ADMINER_AUTOLOGIN: 1
   #     ADMINER_NAME: Disney Land!
 
   bot-manager:
