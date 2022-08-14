@@ -3,6 +3,7 @@ version: "3.9"
 services:
   gateway:
     build: ./DisneyServer/Gateway
+    image: nngguyenanh.azurecr.io/gateway
     command: npm run start:dev
     volumes:
       - ./DisneyServer/Gateway:/app/Gateway
@@ -44,36 +45,38 @@ services:
   #   depends_on:
   #     - gateway-database
 
-  gateway-database:
-    image: postgres:14.4
-    ports:
-      - ${GATEWAY_DB_PORT}:${GATEWAY_DB_PORT}
-    volumes:
-      - disney-data:/var/lib/postgresql
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_DB: disney
-      POSTGRES_PASSWORD: dummyguys
-      PG_TRUST_LOCALNET: true
+  # gateway-database:
+  #   image: postgres:14.4
+  #   ports:
+  #     - ${GATEWAY_DB_PORT}:${GATEWAY_DB_PORT}
+  #   volumes:
+  #     - disney-data:/var/lib/postgresql
+  #   environment:
+  #     POSTGRES_USER: root
+  #     POSTGRES_DB: disney
+  #     POSTGRES_PASSWORD: dummyguys
+  #     PG_TRUST_LOCALNET: true
 
-  gateway-database-manager:
-    image: michalhosna/adminer:4.7.7-en_v1
-    ports:
-      - 8080:8080
-    depends_on:
-      - gateway-database
-    environment:
-      ADMINER_PASSWORD: dummyguys
-      ADMINER_USERNAME: root
-      ADMINER_DB: disney
-      ADMINER_DRIVER: pgsql
-      ADMINER_SERVER: gateway-database
-      ADMINER_AUTOLOGIN: 1
-      ADMINER_NAME: Disney Land!
+  # gateway-database-manager:
+  #   container_name: nngguyenanh/gateway-database-manager
+  #   image: michalhosna/adminer:4.7.7-en_v1
+  #   ports:
+  #     - 8080:8080
+  #   depends_on:
+  #     - gateway-database
+  #   environment:
+  #     ADMINER_PASSWORD: dummyguys
+  #     ADMINER_USERNAME: root
+  #     ADMINER_DB: disney
+  #     ADMINER_DRIVER: pgsql
+  #     ADMINER_SERVER: gateway-database
+  #     ADMINER_AUTOLOGIN: 1
+  #     ADMINER_NAME: Disney Land!
 
   bot-manager:
     stdin_open: true
     build: ./BotManager
+    image: nngguyenanh.azurecr.io/bot-manager
     command: npm start
     volumes:
       - ./BotManager:/app/BotManager
